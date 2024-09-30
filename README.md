@@ -1,75 +1,24 @@
-# Nuxt 3 Minimal Starter
+# Poool Bug Reproduction
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- Create `.env` and define `POOOL_APP_ID`
+- `npm install` & `npm run dev`
 
-## Setup
+## Case 1
 
-Make sure to install the dependencies:
+- Empty cash & cookies
+- Load `http://localhost:3000` in your browser
+- Click on the link to the Tool-Page
+- Paywall should be showing
+- Fill out Paywall & unlock the content
+- The content doesn't switch to the `ContentUnlocked`-component
+- (onRelease-event is maybe not firing or not firing in the expected way?)
 
-```bash
-# npm
-npm install
+## Case 2
 
-# pnpm
-pnpm install
+- Empty cash & cookies
+- Load `http://localhost:3000/tools/tool-123` in your browser
+- Paywall should be showing & working as intended (including unlocking the content properly)
 
-# yarn
-yarn install
+## Alternative Solution
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+I tried placing the `PooolProvider`-component on the page-components in `/pages/` instead of the App-root in `app.vue`. This leads to the paywall not being displayed in Case 1.
